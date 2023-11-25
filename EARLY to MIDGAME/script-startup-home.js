@@ -72,7 +72,6 @@ export async function main(ns) {
     let scriptram = ns.getScriptRam("hgw.js", "home");
     let serverram = ns.getServerMaxRam("home");
 
-    // while (ns.getServerMaxRam("home") > (scriptram * threads + 12)) {
     for (let a = 0; a < 9; a++) {
         for (let i = 0; i < targets.length; i++) {
             for (let j = 0; j < ( serverram / (targets.length * scriptram * threads * 9)); j++){
@@ -81,5 +80,4 @@ export async function main(ns) {
             }
         }
     }
-    // }
 }

@@ -94,17 +94,13 @@ export async function main(ns) {
             ns.scp("hgw.js", my_server, "home");
 
             let maxram = ns.getServerMaxRam(my_server);
-            // let usedram = ns.getServerUsedRam(my_server);
             let scriptram = ns.getScriptRam("hgw.js", "home");
 
             for (let b = 0; b < (maxram/(threads * scriptram * 50)); b++) {
                 ns.exec("hgw.js", my_server, threads, target);
                 await ns.sleep(400);
-                // await ns.sleep(4);
                 maxram = ns.getServerMaxRam(my_server);
-                // usedram = ns.getServerUsedRam(my_server);
             }
-            // ns.tprint(`Completed ${my_server}`);
         }
     }
 }
