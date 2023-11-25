@@ -1,5 +1,7 @@
 /** @param {NS} ns */
 export async function main(ns) {
+
+    
     // const targets = [
     //     "johnson-ortho", 
     //     "silver-helix", 
@@ -82,25 +84,20 @@ export async function main(ns) {
         "pserv-22",
         "pserv-23",
         "pserv-24",
-        "pserv-25",
     ];
 
     const threads = 5000;
+    let maxram = ns.getServerMaxRam(my_servers[24]);
+    let usedram = ns.getServerUsedRam(my_servers[24]);
+    let scriptram = ns.getScriptRam("hgw.js", "home");
 
-    for (let a = 0; a < 1000; a++) {
+    while (usedram < (maxram - (threads*scriptram))) {
         for (let i = 0; i < 25; i++) {
             var target = targets[i];
             var my_server = my_servers[i];
             ns.scp("hgw.js", my_server, "home");
-
-            let maxram = ns.getServerMaxRam(my_server);
-            let scriptram = ns.getScriptRam("hgw.js", "home");
-
-            for (let b = 0; b < (maxram/(threads * scriptram * 50)); b++) {
-                ns.exec("hgw.js", my_server, threads, target);
-                await ns.sleep(400);
-                maxram = ns.getServerMaxRam(my_server);
-            }
+            ns.exec("hgw.js", my_server, threads, target);
+            await ns.sleep(600);
         }
     }
 }

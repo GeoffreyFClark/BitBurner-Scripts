@@ -12,6 +12,7 @@ export async function main(ns) {
     //     "joesguns.js",
     // ];
 
+    // lower requirement targets
     // const targets = [
     //     "johnson-ortho", 
     //     "silver-helix", 
@@ -40,6 +41,7 @@ export async function main(ns) {
     //     "millenium-fitness",
     // ];
 
+    // higher requirement targets
     const targets = [
         "megacorp",
         "ecorp",
@@ -68,16 +70,15 @@ export async function main(ns) {
         "syscore"
     ];
 
-    const threads = 1000;
+    const threads = 5000;
+    let maxram = ns.getServerMaxRam("home");
+    let usedram = ns.getServerUsedRam("home");
     let scriptram = ns.getScriptRam("hgw.js", "home");
-    let serverram = ns.getServerMaxRam("home");
 
-    for (let a = 0; a < 9; a++) {
-        for (let i = 0; i < targets.length; i++) {
-            for (let j = 0; j < ( serverram / (targets.length * scriptram * threads * 9)); j++){
-                ns.exec("hgw.js", "home", threads, targets[i]);
-                await ns.sleep(10000);
-            }
+    while (usedram < (maxram - (threads*scriptram))) {
+        for (let i = 0; i < 25; i++) {
+            ns.exec("hgw.js", "home", threads, targets[i]);
+            await ns.sleep(15000);
         }
     }
 }
