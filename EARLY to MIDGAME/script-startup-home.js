@@ -71,13 +71,16 @@ export async function main(ns) {
     ];
 
     const threads = 5000;
-    let maxram = ns.getServerMaxRam("home");
-    let usedram = ns.getServerUsedRam("home");
-    let scriptram = ns.getScriptRam("hgw.js", "home");
+    const maxram = ns.getServerMaxRam("home");
+    const scriptram = ns.getScriptRam("hgw.js", "home");
 
-    while (usedram < (maxram - (threads*scriptram))) {
-        for (let i = 0; i < 25; i++) {
-            ns.exec("hgw.js", "home", threads, targets[i]);
+    while (true) {
+        for (let target of targets) {
+            let usedram = ns.getServerUsedRam("home");
+            if (usedram >= (maxram - (threads * scriptram))) {
+                return; 
+            }
+            ns.exec("hgw.js", "home", threads, target);
             await ns.sleep(15000);
         }
     }
