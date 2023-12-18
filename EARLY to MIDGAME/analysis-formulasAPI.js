@@ -151,10 +151,10 @@ export async function main(ns) {
     z["moneyAvailable"] = ns.getServerMaxMoney("ecorp") * (0.9);
     let h = ns.formulas.hacking.hackPercent(z, me);
     ns.tprint(`100 thread hack: ${h*100}`);
-    ns.tprint(`100 thread hack: ${h*200}`);
-    ns.tprint(`100 thread hack: ${h*300}`);
-    ns.tprint(`100 thread hack: ${h*400}`);
-    ns.tprint(`100 thread hack: ${h*500}`);
+    ns.tprint(`200 thread hack: ${h*200}`);
+    ns.tprint(`300 thread hack: ${h*300}`);
+    ns.tprint(`400 thread hack: ${h*400}`);
+    ns.tprint(`500 thread hack: ${h*500}`);
 
 
     // ns.getServerMaxMoney
