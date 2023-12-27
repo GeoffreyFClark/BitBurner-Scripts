@@ -18,7 +18,7 @@ export async function main(ns) {
             let availableMoney = ns.getPlayer()["money"];
 
             /** increase if(s_forecast > x ...) to > 0.6 or something more selective if not enough capital 
-            to buy max shares of all positively forcast tickers on the stock market */
+            to buy max shares of all positively forecast tickers on the stock market */
             if (s_forecast > 0.505 && !stocktable[s] && (availableMoney > maxPosCost)) { 
                 ns.stock.buyStock(s, max);
                 stocktable[s] = true;
